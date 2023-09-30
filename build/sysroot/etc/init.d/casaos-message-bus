@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+
+: ${message_bus_config:=/etc/casaos/message-bus.conf}
+
+description="CasaOS Message Bus Service"
+command="/usr/bin/casaos-message-bus"
+command_args="-c $message_bus_config"
+required_files=$message_bus_config
+pidfile="/var/run/casaos/message-bus.pid"
+supervisor="supervise-daemon"
+
+depend() {
+	need casaos-gateway
+}
